@@ -24,7 +24,18 @@ function validateData(data: DataType): DataType {
 const file = fs.readFileSync('./src/input.json', 'utf8');
 const data: DataType = JSON.parse(file) as DataType;
 
-const validatedData = validateData(data);
-const compute = pipe(validatedData.data, calculate, double);
+const x = pipe(
+  Data.decode(data),
+  E.fold(
+    (error: any) => {
+      throw error;
+    },
+    (data: DataType) => {
+      return data;
+    }
+  )
+);
+console.log(x);
 
-console.log('Total is:', compute);
+const sum = pipe(x.data, calculate, double);
+console.log('Total is:', sum);
