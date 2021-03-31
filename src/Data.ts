@@ -6,13 +6,13 @@ const Contents = t.type({
 });
 
 export const Metadata = t.type({
-  age: t.Int,
+  age: t.number,
   healthy: t.string,
   contents: t.array(Contents)
 });
 
 export const Data = t.type({
-  data: t.array(t.Int),
+  data: t.array(t.number),
   metadata: Metadata
 });
 

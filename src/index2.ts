@@ -56,12 +56,23 @@ const lenseData1 = pipe(
   L.modify(capitalize)
 );
 
+console.log(JSON.stringify(lenseData1(data), null, 2));
+
 const lenseData2 = pipe(
   L.id<DataType>(),
   L.prop('metadata'),
   L.prop('age'),
-  L.compose(doubleUp)
+  L.modify(doubleUp)
 );
 
-console.log(JSON.stringify(lenseData1(data), null, 2));
 console.log(JSON.stringify(lenseData2(data), null, 2));
+
+const filterCat = (s: any[]): any[] => s.filter((x) => x.animal === 'cat');
+const lenseData3 = pipe(
+  L.id<DataType>(),
+  L.prop('metadata'),
+  L.prop('contents'),
+  L.modify(filterCat)
+);
+
+console.log(JSON.stringify(lenseData3(data), null, 2));
