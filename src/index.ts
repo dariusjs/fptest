@@ -28,3 +28,8 @@ const validatedData = validateData(data);
 const compute = pipe(validatedData.data, calculate, double);
 
 console.log('Total is:', compute);
+
+const printer = (s: any[]): any[] => s.map((x) => x + x);
+const compute2 = pipe(validatedData.data, printer);
+
+console.log('Items are', compute2);
