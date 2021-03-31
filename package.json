@@ -15,7 +15,8 @@
     "axios": "^0.21.1",
     "fp-ts": "^2.9.5",
     "fp-ts-contrib": "^0.1.21",
-    "io-ts": "^2.2.16"
+    "io-ts": "^2.2.16",
+    "monocle-ts": "^2.3.9"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.9.0",

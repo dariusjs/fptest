@@ -1,4 +1,12 @@
 {
   "data": [5, 5, 15, 7, 3],
-  "metadata": "stuff"
+  "metadata": {
+    "age": 5,
+    "healthy": "yes",
+    "contents": [
+      { "animal": "cat", "name": "meowmix" },
+      { "animal": "dog", "name": "woofy" },
+      { "animal": "parrot", "name": "tweety" }
+    ]
+  }
 }
