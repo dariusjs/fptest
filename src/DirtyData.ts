@@ -6,6 +6,7 @@ import { isNone } from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/pipeable';
 import * as t from 'io-ts';
 import { NumberFromString, NumberFromStringC } from 'io-ts-types';
+import * as L from 'monocle-ts/lib/Lens';
 
 export type ArrayFromObject<C extends t.Mixed> = t.Type<
   NonEmptyArray<t.TypeOf<C>>,
@@ -110,3 +111,15 @@ const validate: PersonType = pipe(
   )
 );
 console.log(JSON.stringify(validate, null, 2));
+
+const filterCat = (s: any[]): any[] => s.filter((x) => x.animal === 'cat');
+const lenseData3 = pipe(
+  L.id<PersonType>(),
+  L.prop('metadata'),
+  L.prop('pets'),
+  L.modify(filterCat)
+);
+
+const filteredData = pipe(lenseData3(validate));
+
+console.log(JSON.stringify(filteredData, null, 2));
