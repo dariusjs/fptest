@@ -1,8 +1,7 @@
-export const data = [5, 51, 1234, 5, 23];
+export const xx = {};
 
-for (const element of data) {
-  console.log(element);
-  data.pop(element);
+if (JSON.stringify(xx) === JSON.stringify({})) {
+  console.log(JSON.stringify(xx) === JSON.stringify({}) ? 0 : xx);
+} else {
+  console.log('not');
 }
-
-console.log(data);

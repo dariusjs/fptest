@@ -5,7 +5,7 @@ import { either as E } from 'fp-ts';
 import { isNone } from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/pipeable';
 import * as t from 'io-ts';
-import { NumberFromString } from 'io-ts-types';
+import { NumberFromString, NumberFromStringC } from 'io-ts-types';
 
 export type ArrayFromObject<C extends t.Mixed> = t.Type<
   NonEmptyArray<t.TypeOf<C>>,
@@ -35,6 +35,26 @@ export function ArrayFromObject<C extends t.Mixed>(
   );
 }
 
+export const OverWriteEmptyObjectToZero: NumberFromStringC = new t.Type<
+  number,
+  string,
+  unknown
+>(
+  'NumberFromString',
+  t.number.is,
+  (u, c) => {
+    u = JSON.stringify(u) === JSON.stringify({}) ? '0' : u;
+    return pipe(
+      t.string.validate(u, c),
+      chain((s) => {
+        const n = +s;
+        return isNaN(n) || s.trim() === '' ? t.failure(u, c) : t.success(n);
+      })
+    );
+  },
+  String
+);
+
 const Pets = t.type({
   animal: t.string,
   name: t.string
@@ -53,7 +73,9 @@ export const Attributes = t.type({
 
 export const Person = t.type({
   name: ArrayFromObject(Attributes),
-  data: t.array(t.union([NumberFromString, t.number])),
+  data: t.array(
+    t.union([NumberFromString, OverWriteEmptyObjectToZero, t.number])
+  ),
   metadata: Metadata
 });
 
@@ -64,7 +86,7 @@ export type PetsType = t.TypeOf<typeof Pets>;
 
 const data = {
   name: { firstName: 'John', lastName: 'Citizen' },
-  data: ['5', '10', 5],
+  data: ['5', '10', 5, {}],
   metadata: {
     age: 5,
     healthy: 'yes',
