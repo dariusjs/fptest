@@ -2,6 +2,7 @@
   "name": "fptest",
   "version": "1.0.0",
   "scripts": {
+    "index3": "node-ts src/index3.ts",
     "dev": "npx nodemon",
     "devDb": "npx yarn dynamo; npx nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
@@ -17,7 +18,8 @@
     "fp-ts-contrib": "^0.1.21",
     "io-ts": "^2.2.16",
     "io-ts-types": "^0.5.16",
-    "monocle-ts": "^2.3.9"
+    "monocle-ts": "^2.3.9",
+    "newtype-ts": "^0.3.4"
   },
   "devDependencies": {
     "@aws-sdk/client-dynamodb": "^3.9.0",
