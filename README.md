@@ -66,7 +66,6 @@ export type PersonType = t.TypeOf<typeof Person>;
 export type NameType = t.TypeOf<typeof Name>;
 export type MetaDataType = t.TypeOf<typeof Metadata>;
 export type PetsType = t.TypeOf<typeof Pets>;
-
 ```
 
 Finally at the end of the excerpt above, we can export the types so they are available as native Typescript Types.
@@ -110,7 +109,42 @@ const data: PersonType = {
     ]
   }
 };
-
-
 const validate: PersonType = validateData(data);
 ```
+
+The output of validate is now showing up as a workable piece of data that we expect.
+
+``` typescript
+{
+  "name": {
+    "firstName": "John",
+    "lastName": "Citizen"
+  },
+  "data": [
+    5,
+    10,
+    5,
+    0
+  ],
+  "metadata": {
+    "age": 5,
+    "healthy": "yes",
+    "pets": [
+      {
+        "animal": "cat",
+        "name": "meowmix"
+      },
+      {
+        "animal": "dog",
+        "name": "woofy"
+      },
+      {
+        "animal": "parrot",
+        "name": "tweety"
+      }
+    ]
+  }
+}
+```
+
+Hope this was helpful, this just scratches the surface of what io-ts can provide. I hope some of these concepts eventually make into Javascript one day.
